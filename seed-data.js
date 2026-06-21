@@ -2,15 +2,21 @@ window.SEED_STATE = {
   "cars": [
     {
       "name": "GK5 フィット",
-      "currentMileage": 348102
+      "currentMileage": 348102,
+      "mainPhoto": "",
+      "model": "DBA-GK5",
+      "number": "",
+      "purchaseDate": "",
+      "memo": ""
     },
     {
       "name": "FR5 ジェイド",
-      "currentMileage": 0
-    },
-    {
-      "name": "その他",
-      "currentMileage": 0
+      "currentMileage": 0,
+      "mainPhoto": "",
+      "model": "DBA-FR5",
+      "number": "",
+      "purchaseDate": "",
+      "memo": ""
     }
   ],
   "selectedCar": "GK5 フィット",
@@ -800,5 +806,6 @@ window.SEED_STATE = {
       "nextDate": "",
       "seeded": true
     }
-  ]
+  ],
+  "photos": []
 };
