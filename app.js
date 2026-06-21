@@ -21,8 +21,17 @@ function migrate(){
     if(!("memo" in c)) c.memo = "";
   });
   state.records = state.records.filter(r => r.car !== "その他");
+  state.cycles.forEach(c => {
+    if(c.category === "交換" && c.name === "ミッションオイル") c.name = "ミッションフルード";
+    if(c.category === "交換" && c.name === "タイヤ交換") c.name = "タイヤ";
+  });
+  if(!state.cycles.some(c => c.category === "交換" && c.name === "ベルト")){
+    state.cycles.push({category:"交換", name:"ベルト", km:0, month:60});
+  }
   state.records.forEach(r => {
     if(!r.category) r.category = "交換";
+    if(r.category === "交換" && r.work === "ミッションオイル") r.work = "ミッションフルード";
+    if(r.category === "交換" && r.work === "タイヤ交換") r.work = "タイヤ";
     if(!("cycleKm" in r)) r.cycleKm = 0;
     if(!("cycleMonth" in r)) r.cycleMonth = 0;
     delete r.cost;
@@ -41,6 +50,28 @@ function carObj(name=currentCar()){ return state.cars.find(c => c.name === name)
 function carRecords(){ return state.records.filter(r => r.car === currentCar()); }
 function cycleFor(category, work){ return state.cycles.find(c => c.category === category && c.name === work) || {km:0, month:0}; }
 
+const EXCHANGE_ITEM_ORDER = [
+  "エンジンオイル",
+  "オイルフィルター",
+  "ブレーキフルード",
+  "ブレーキパッド",
+  "ミッションフルード",
+  "バッテリー",
+  "エアクリーナー",
+  "クラッチフルード",
+  "クラッチ",
+  "スパークプラグ",
+  "タイヤ",
+  "ベルト",
+  "その他"
+];
+
+function itemSortKey(name){
+  const i = EXCHANGE_ITEM_ORDER.indexOf(name);
+  return i === -1 ? 999 : i;
+}
+
+
 function openMenu(){ $("drawer").classList.add("open"); $("sideBackdrop").classList.add("open"); }
 function closeMenu(){ $("drawer").classList.remove("open"); $("sideBackdrop").classList.remove("open"); }
 function showView(name){ document.querySelectorAll(".view").forEach(v=>v.classList.remove("active")); $("view-"+name).classList.add("active"); closeMenu(); render(); }
@@ -53,7 +84,9 @@ function renderCarSelects(){
 
 function updateWorkOptions(selected=""){
   const category = $("category").value;
-  const items = state.cycles.filter(c => c.category === category);
+  const items = state.cycles
+    .filter(c => c.category === category)
+    .sort((a,b) => category === "交換" ? itemSortKey(a.name) - itemSortKey(b.name) : a.name.localeCompare(b.name, "ja"));
   $("work").innerHTML = items.map(c => `<option value="${esc(c.name)}">${esc(c.name)}</option>`).join("");
   if(selected && items.some(c => c.name === selected)) $("work").value = selected;
   updateCycleInputs();
@@ -204,7 +237,12 @@ function renderHistoryControls(){
     ? carRecords()
     : carRecords().filter(r => r.category === historyCategory);
 
-  const items = [...new Set(source.map(r => r.work))].sort();
+  let items = [...new Set(source.map(r => r.work))];
+  if(historyCategory === "交換"){
+    items.sort((a,b) => itemSortKey(a) - itemSortKey(b));
+  }else{
+    items.sort((a,b) => a.localeCompare(b, "ja"));
+  }
 
   itemSelect.innerHTML = `<option value="">全て見る</option>` +
     items.map(i => `<option value="${esc(i)}">${esc(i)}</option>`).join("");
@@ -248,7 +286,11 @@ function groupedHistoryHtml(records){
     groups[key].push(r);
   });
 
-  return Object.keys(groups).sort().map((key, idx) => `
+  const keys = Object.keys(groups).sort((a,b) => {
+    if(historyCategory === "交換") return itemSortKey(a) - itemSortKey(b);
+    return a.localeCompare(b, "ja");
+  });
+  return keys.map((key, idx) => `
     <details class="history-group" ${idx === 0 ? "open" : ""}>
       <summary>${esc(key)} <span class="record-meta">${groups[key].length}件</span></summary>
       <div class="history-group-body">
@@ -282,7 +324,10 @@ function renderSettings(){
       <button class="danger-btn" onclick="deleteCar('${esc(c.name)}')">車両削除</button>
     </div>
   `).join("");
-  $("settingsList").innerHTML = state.cycles.filter(c => c.category === "交換").map(c => {
+  $("settingsList").innerHTML = state.cycles
+    .filter(c => c.category === "交換")
+    .sort((a,b) => itemSortKey(a.name) - itemSortKey(b.name))
+    .map(c => {
     const i = state.cycles.indexOf(c);
     return `<div class="settings-item">
       <div class="settings-name">${esc(c.name)}</div>

@@ -35,14 +35,32 @@ window.SEED_STATE = {
     },
     {
       "category": "交換",
-      "name": "ミッションオイル",
+      "name": "ブレーキフルード",
+      "km": 0,
+      "month": 24
+    },
+    {
+      "category": "交換",
+      "name": "ブレーキパッド",
+      "km": 0,
+      "month": 0
+    },
+    {
+      "category": "交換",
+      "name": "ミッションフルード",
       "km": 30000,
       "month": 24
     },
     {
       "category": "交換",
-      "name": "ブレーキフルード",
+      "name": "バッテリー",
       "km": 0,
+      "month": 36
+    },
+    {
+      "category": "交換",
+      "name": "エアクリーナー",
+      "km": 30000,
       "month": 24
     },
     {
@@ -53,21 +71,9 @@ window.SEED_STATE = {
     },
     {
       "category": "交換",
-      "name": "冷却水 LLC",
+      "name": "クラッチ",
       "km": 0,
-      "month": 48
-    },
-    {
-      "category": "交換",
-      "name": "エアクリーナー",
-      "km": 30000,
-      "month": 24
-    },
-    {
-      "category": "交換",
-      "name": "エアコンフィルター",
-      "km": 10000,
-      "month": 12
+      "month": 0
     },
     {
       "category": "交換",
@@ -77,21 +83,39 @@ window.SEED_STATE = {
     },
     {
       "category": "交換",
-      "name": "タイヤローテーション",
-      "km": 5000,
-      "month": 6
-    },
-    {
-      "category": "交換",
-      "name": "タイヤ交換",
+      "name": "タイヤ",
       "km": 0,
       "month": 60
     },
     {
       "category": "交換",
-      "name": "ブレーキパッド",
+      "name": "ベルト",
+      "km": 0,
+      "month": 60
+    },
+    {
+      "category": "交換",
+      "name": "その他",
       "km": 0,
       "month": 0
+    },
+    {
+      "category": "交換",
+      "name": "冷却水 LLC",
+      "km": 0,
+      "month": 48
+    },
+    {
+      "category": "交換",
+      "name": "エアコンフィルター",
+      "km": 10000,
+      "month": 12
+    },
+    {
+      "category": "交換",
+      "name": "タイヤローテーション",
+      "km": 5000,
+      "month": 6
     },
     {
       "category": "交換",
@@ -101,15 +125,15 @@ window.SEED_STATE = {
     },
     {
       "category": "交換",
-      "name": "バッテリー",
+      "name": "ワイパーゴム",
       "km": 0,
-      "month": 36
+      "month": 12
     },
     {
       "category": "交換",
-      "name": "クラッチ",
+      "name": "車検",
       "km": 0,
-      "month": 0
+      "month": 24
     },
     {
       "category": "調整",
@@ -160,24 +184,6 @@ window.SEED_STATE = {
       "month": 0
     },
     {
-      "category": "交換",
-      "name": "ワイパーゴム",
-      "km": 0,
-      "month": 12
-    },
-    {
-      "category": "交換",
-      "name": "車検",
-      "km": 0,
-      "month": 24
-    },
-    {
-      "category": "交換",
-      "name": "その他",
-      "km": 0,
-      "month": 0
-    },
-    {
       "category": "調整",
       "name": "その他",
       "km": 0,
@@ -212,7 +218,7 @@ window.SEED_STATE = {
       "date": "2022-07-28",
       "km": 244644,
       "category": "交換",
-      "work": "ミッションオイル",
+      "work": "ミッションフルード",
       "cost": 0,
       "memo": "ミッションオイル交換",
       "cycleKm": 30000,
@@ -317,7 +323,7 @@ window.SEED_STATE = {
       "date": "2022-11-30",
       "km": 262035,
       "category": "交換",
-      "work": "ミッションオイル",
+      "work": "ミッションフルード",
       "cost": 0,
       "memo": "ミッションオイル交換 / タイロッドエンドブーツ・ドライブシャフトブーツ",
       "cycleKm": 30000,
@@ -482,7 +488,7 @@ window.SEED_STATE = {
       "date": "2024-01-29",
       "km": 305134,
       "category": "交換",
-      "work": "ミッションオイル",
+      "work": "ミッションフルード",
       "cost": 0,
       "memo": "ミッションオイル交換 / 左右ドライブシャフト",
       "cycleKm": 30000,
@@ -557,7 +563,7 @@ window.SEED_STATE = {
       "date": "2024-07-08",
       "km": 317966,
       "category": "交換",
-      "work": "タイヤ交換",
+      "work": "タイヤ",
       "cost": 0,
       "memo": "タイヤ交換交換 / ADVAN FLEVA 205/50R16",
       "cycleKm": 0,
@@ -782,7 +788,7 @@ window.SEED_STATE = {
       "date": "2025-08-26",
       "km": 347267,
       "category": "交換",
-      "work": "タイヤ交換",
+      "work": "タイヤ",
       "cost": 0,
       "memo": "タイヤ交換交換 / パンク保証にて4本交換",
       "cycleKm": 0,
