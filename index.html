@@ -165,6 +165,15 @@
         <div id="settingsList"></div>
         <button onclick="saveSettings()">設定を保存</button>
       </section>
+
+      <section class="card">
+        <h2>データバックアップ</h2>
+        <p class="record-meta">車両情報・整備履歴・写真・交換推奨設定をJSONファイルとして保存できます。</p>
+        <div class="tools">
+          <button class="secondary" onclick="exportBackup()">バックアップを書き出し</button>
+          <label class="import">バックアップを復元<input id="importFileSettings" type="file" accept="application/json" /></label>
+        </div>
+      </section>
     </section>
 
     <section id="view-backup" class="view">
@@ -172,8 +181,8 @@
       <section class="card">
         <h2>データ管理</h2>
         <div class="tools">
-          <button class="secondary" onclick="exportBackup()">バックアップ</button>
-          <label class="import">読込<input id="importFile" type="file" accept="application/json" /></label>
+          <button class="secondary" onclick="exportBackup()">バックアップを書き出し</button>
+          <label class="import">バックアップを復元<input id="importFile" type="file" accept="application/json" /></label>
         </div>
         <button class="secondary" onclick="resetSeed()">初期履歴に戻す</button>
       </section>

@@ -454,7 +454,20 @@ $("mainPhotoInput").addEventListener("change", async e => {
   save(); render(); alert("メイン写真を変更しました。");
 });
 
-function exportBackup(){ const blob = new Blob([JSON.stringify(state,null,2)], {type:"application/json"}); const a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=`seibi-v3-backup-${today()}.json`; a.click(); URL.revokeObjectURL(a.href); }
+function exportBackup(){
+  const backup = {
+    app: "整備記録PWA",
+    version: 7,
+    exportedAt: new Date().toISOString(),
+    data: state
+  };
+  const blob = new Blob([JSON.stringify(backup, null, 2)], {type:"application/json"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = `seibi-backup-${today()}.json`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
 function resetSeed(){ if(!confirm("追加・変更した内容を消して、初期履歴に戻しますか？")) return; state = structuredClone(window.SEED_STATE); migrate(); save(); init(); }
 
 $("topCar").addEventListener("change", e => { state.selectedCar = e.target.value; save(); render(); });
@@ -472,12 +485,37 @@ $("historyItemSelect").addEventListener("change", e => {
 $("category").addEventListener("change", () => updateWorkOptions());
 $("work").addEventListener("change", updateCycleInputs);
 ["km","date","cycleKm","cycleMonth"].forEach(id => { $(id).addEventListener("input", updateNextPreview); $(id).addEventListener("change", updateNextPreview); });
+async function importBackupFile(file){
+  if(!file) return;
+  try{
+    const parsed = JSON.parse(await file.text());
+    const data = parsed.data && parsed.app ? parsed.data : parsed;
+    if(!data.records || !data.cars || !data.cycles){
+      alert("読み込めない形式です。");
+      return;
+    }
+    if(!confirm("バックアップから復元しますか？\\n現在のデータは上書きされます。")) return;
+    state = data;
+    migrate();
+    save();
+    init();
+    alert("復元しました。");
+  }catch(err){
+    alert("復元に失敗しました。ファイルを確認してください。");
+  }
+}
+
 $("importFile").addEventListener("change", async e => {
-  const file = e.target.files[0]; if(!file) return;
-  const data = JSON.parse(await file.text());
-  if(!data.records){ alert("読み込めない形式です。"); return; }
-  state = data; migrate(); save(); init();
+  await importBackupFile(e.target.files[0]);
+  e.target.value = "";
 });
+
+if($("importFileSettings")){
+  $("importFileSettings").addEventListener("change", async e => {
+    await importBackupFile(e.target.files[0]);
+    e.target.value = "";
+  });
+}
 
 function render(){ renderCarSelects(); renderHome(); renderAlerts(); renderRecords(); renderSettings(); renderAlbum(); }
 function init(){ renderCarSelects(); $("date").value = today(); updateWorkOptions(); render(); }
