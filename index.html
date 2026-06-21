@@ -63,6 +63,17 @@
     .item-list{display:grid;gap:10px}.item-btn{background:#fff;color:var(--text);border:1px solid var(--border);text-align:left;margin:0}
     .photo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}.photo-card{background:var(--soft);border:1px solid #eef0f3;border-radius:14px;overflow:hidden}.photo-card img{width:100%;aspect-ratio:1.2/1;object-fit:cover;display:block}.photo-body{padding:10px}.photo-note{font-size:13px;color:var(--muted);line-height:1.5}.photo-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:0 10px 10px}.photo-actions button{margin:0;padding:9px;font-size:13px}
     .car-info{margin-top:10px;color:var(--muted);font-size:14px;line-height:1.6;text-align:center}.car-admin-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.car-admin-actions button{margin-top:10px}.danger-btn{background:var(--danger-soft);color:var(--danger)}
+    
+    .history-filter-box{background:var(--soft);border:1px solid #eef0f3;border-radius:16px;padding:12px;margin-bottom:12px}
+    .history-filter-box label{margin-top:0}
+    .history-count{color:var(--muted);font-size:14px;margin:10px 0 0}
+    .history-group{border:1px solid var(--border);border-radius:16px;margin:10px 0;overflow:hidden;background:#fff}
+    .history-group summary{list-style:none;padding:14px;font-weight:900;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .history-group summary::-webkit-details-marker{display:none}
+    .history-group summary::after{content:"⌄";font-size:18px;color:var(--muted)}
+    .history-group[open] summary::after{content:"⌃"}
+    .history-group-body{padding:0 14px 4px}
+
     @media(max-width:620px){.row,.summary,.tools,.chips{grid-template-columns:1fr}.view-title{font-size:24px}.hero{height:165px}.photo-grid{grid-template-columns:1fr}}
   </style>
 </head>
@@ -106,10 +117,22 @@
     <section id="view-history" class="view">
       <div class="view-title">整備履歴</div>
       <section class="card">
-        <div class="chips" id="historyCategoryChips"></div>
-        <div id="historyItemSelect"></div>
-      </section>
-      <section class="card">
+        <div class="history-filter-box">
+          <label>分類</label>
+          <select id="historyCategorySelect">
+            <option value="全て見る">全て見る</option>
+            <option value="交換">交換</option>
+            <option value="調整">調整</option>
+            <option value="清掃">清掃</option>
+          </select>
+
+          <label>項目</label>
+          <select id="historyItemSelect">
+            <option value="">全て見る</option>
+          </select>
+
+          <div class="history-count" id="historyCount">該当履歴：0件</div>
+        </div>
         <input id="search" placeholder="検索：オイル、ブレーキ、345852 など" />
         <div id="records"></div>
       </section>

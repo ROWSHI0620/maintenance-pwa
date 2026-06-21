@@ -194,26 +194,75 @@ function renderAlerts(){
 }
 
 function renderHistoryControls(){
-  const cats = ["全て見る","交換","調整","清掃"];
-  $("historyCategoryChips").innerHTML = cats.map(c => `<button class="chip ${historyCategory===c ? "active" : ""}" onclick="setHistoryCategory('${c}')">${c}</button>`).join("");
-  if(historyCategory === "全て見る"){ $("historyItemSelect").innerHTML = ""; return; }
-  const items = [...new Set(carRecords().filter(r=>r.category===historyCategory).map(r=>r.work))].sort();
-  $("historyItemSelect").innerHTML = `<div class="item-list">
-    <button class="item-btn ${historyItem==="" ? "active" : ""}" onclick="setHistoryItem('')">全て見る</button>
-    ${items.map(i => `<button class="item-btn ${historyItem===i ? "active" : ""}" onclick="setHistoryItem('${esc(i)}')">${esc(i)}</button>`).join("")}
-  </div>`;
-}
-function setHistoryCategory(c){ historyCategory = c; historyItem = ""; renderHistoryControls(); renderRecords(); }
-function setHistoryItem(i){ historyItem = i; renderHistoryControls(); renderRecords(); }
+  const categorySelect = $("historyCategorySelect");
+  const itemSelect = $("historyItemSelect");
+  if(!categorySelect || !itemSelect) return;
 
-function renderRecords(){
+  categorySelect.value = historyCategory;
+
+  const source = historyCategory === "全て見る"
+    ? carRecords()
+    : carRecords().filter(r => r.category === historyCategory);
+
+  const items = [...new Set(source.map(r => r.work))].sort();
+
+  itemSelect.innerHTML = `<option value="">全て見る</option>` +
+    items.map(i => `<option value="${esc(i)}">${esc(i)}</option>`).join("");
+
+  if(items.includes(historyItem)){
+    itemSelect.value = historyItem;
+  }else{
+    historyItem = "";
+    itemSelect.value = "";
+  }
+}
+
+function getFilteredHistoryRecords(){
   const q = $("search").value.trim().toLowerCase();
   let records = carRecords();
-  if(historyCategory !== "全て見る") records = records.filter(r => r.category === historyCategory);
-  if(historyItem) records = records.filter(r => r.work === historyItem);
-  records = records.filter(r => JSON.stringify(r).toLowerCase().includes(q)).sort((a,b)=>new Date(b.date)-new Date(a.date)||Number(b.km||0)-Number(a.km||0));
+
+  if(historyCategory !== "全て見る"){
+    records = records.filter(r => r.category === historyCategory);
+  }
+
+  if(historyItem){
+    records = records.filter(r => r.work === historyItem);
+  }
+
+  return records
+    .filter(r => JSON.stringify(r).toLowerCase().includes(q))
+    .sort((a,b)=>new Date(b.date)-new Date(a.date)||Number(b.km||0)-Number(a.km||0));
+}
+
+function groupedHistoryHtml(records){
+  if(!records.length) return '<div class="empty">記録がありません</div>';
+
+  if(historyItem){
+    return recordHtml(records);
+  }
+
+  const groups = {};
+  records.forEach(r => {
+    const key = historyCategory === "全て見る" ? `${r.category} / ${r.work}` : r.work;
+    if(!groups[key]) groups[key] = [];
+    groups[key].push(r);
+  });
+
+  return Object.keys(groups).sort().map((key, idx) => `
+    <details class="history-group" ${idx === 0 ? "open" : ""}>
+      <summary>${esc(key)} <span class="record-meta">${groups[key].length}件</span></summary>
+      <div class="history-group-body">
+        ${recordHtml(groups[key])}
+      </div>
+    </details>
+  `).join("");
+}
+
+function renderRecords(){
   renderHistoryControls();
-  $("records").innerHTML = recordHtml(records);
+  const records = getFilteredHistoryRecords();
+  $("historyCount").textContent = `該当履歴：${records.length}件`;
+  $("records").innerHTML = groupedHistoryHtml(records);
 }
 
 function renderSettings(){
@@ -366,6 +415,15 @@ function resetSeed(){ if(!confirm("追加・変更した内容を消して、初
 $("topCar").addEventListener("change", e => { state.selectedCar = e.target.value; save(); render(); });
 $("nowKm").addEventListener("input", () => { carObj().currentMileage = Number($("nowKm").value || 0); save(); render(); });
 $("search").addEventListener("input", renderRecords);
+$("historyCategorySelect").addEventListener("change", e => {
+  historyCategory = e.target.value;
+  historyItem = "";
+  renderRecords();
+});
+$("historyItemSelect").addEventListener("change", e => {
+  historyItem = e.target.value;
+  renderRecords();
+});
 $("category").addEventListener("change", () => updateWorkOptions());
 $("work").addEventListener("change", updateCycleInputs);
 ["km","date","cycleKm","cycleMonth"].forEach(id => { $(id).addEventListener("input", updateNextPreview); $(id).addEventListener("change", updateNextPreview); });
