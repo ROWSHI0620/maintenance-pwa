@@ -1,107 +1,184 @@
 window.SEED_STATE = {
   "cars": [
-    "GK5 フィット",
-    "FR5 ジェイド",
-    "その他"
+    {
+      "name": "GK5 フィット",
+      "currentMileage": 348102
+    },
+    {
+      "name": "FR5 ジェイド",
+      "currentMileage": 0
+    },
+    {
+      "name": "その他",
+      "currentMileage": 0
+    }
   ],
-  "currentMileage": 348102,
+  "selectedCar": "GK5 フィット",
   "cycles": [
     {
+      "category": "交換",
       "name": "エンジンオイル",
       "km": 5000,
       "month": 6
     },
     {
+      "category": "交換",
       "name": "オイルフィルター",
       "km": 10000,
       "month": 12
     },
     {
+      "category": "交換",
       "name": "ミッションオイル",
       "km": 30000,
       "month": 24
     },
     {
+      "category": "交換",
       "name": "ブレーキフルード",
       "km": 0,
       "month": 24
     },
     {
+      "category": "交換",
       "name": "クラッチフルード",
       "km": 0,
       "month": 24
     },
     {
+      "category": "交換",
       "name": "冷却水 LLC",
       "km": 0,
       "month": 48
     },
     {
+      "category": "交換",
       "name": "エアクリーナー",
       "km": 30000,
       "month": 24
     },
     {
+      "category": "交換",
       "name": "エアコンフィルター",
       "km": 10000,
       "month": 12
     },
     {
+      "category": "交換",
       "name": "スパークプラグ",
       "km": 100000,
       "month": 0
     },
     {
+      "category": "交換",
       "name": "タイヤローテーション",
       "km": 5000,
       "month": 6
     },
     {
+      "category": "交換",
       "name": "タイヤ交換",
       "km": 0,
       "month": 60
     },
     {
+      "category": "交換",
       "name": "ブレーキパッド",
       "km": 0,
       "month": 0
     },
     {
+      "category": "交換",
       "name": "ブレーキローター",
       "km": 0,
       "month": 0
     },
     {
+      "category": "交換",
       "name": "バッテリー",
       "km": 0,
       "month": 36
     },
     {
+      "category": "交換",
       "name": "クラッチ",
       "km": 0,
       "month": 0
     },
     {
+      "category": "調整",
       "name": "アライメント",
       "km": 0,
       "month": 12
     },
     {
+      "category": "調整",
+      "name": "サイドブレーキ",
+      "km": 0,
+      "month": 0
+    },
+    {
+      "category": "調整",
+      "name": "光軸",
+      "km": 0,
+      "month": 0
+    },
+    {
+      "category": "調整",
+      "name": "クラッチペダル",
+      "km": 0,
+      "month": 0
+    },
+    {
+      "category": "清掃",
       "name": "スロットルボデー",
       "km": 0,
       "month": 12
     },
     {
+      "category": "清掃",
+      "name": "エアフロ",
+      "km": 0,
+      "month": 12
+    },
+    {
+      "category": "清掃",
+      "name": "エアコンフィルター周り",
+      "km": 0,
+      "month": 12
+    },
+    {
+      "category": "清掃",
+      "name": "ブレーキ周り",
+      "km": 0,
+      "month": 0
+    },
+    {
+      "category": "交換",
       "name": "ワイパーゴム",
       "km": 0,
       "month": 12
     },
     {
+      "category": "交換",
       "name": "車検",
       "km": 0,
       "month": 24
     },
     {
+      "category": "交換",
+      "name": "その他",
+      "km": 0,
+      "month": 0
+    },
+    {
+      "category": "調整",
+      "name": "その他",
+      "km": 0,
+      "month": 0
+    },
+    {
+      "category": "清掃",
       "name": "その他",
       "km": 0,
       "month": 0
@@ -113,6 +190,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2022-07-28",
       "km": 244644,
+      "category": "交換",
       "work": "クラッチ",
       "cost": 0,
       "memo": "クラッチ交換",
@@ -127,6 +205,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2022-07-28",
       "km": 244644,
+      "category": "交換",
       "work": "ミッションオイル",
       "cost": 0,
       "memo": "ミッションオイル交換",
@@ -141,6 +220,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2022-07-29",
       "km": 244940,
+      "category": "交換",
       "work": "エンジンオイル",
       "cost": 0,
       "memo": "エンジンオイル交換",
@@ -155,6 +235,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2022-07-29",
       "km": 244940,
+      "category": "交換",
       "work": "オイルフィルター",
       "cost": 0,
       "memo": "オイルフィルター交換",
@@ -169,6 +250,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2022-10-07",
       "km": 257000,
+      "category": "交換",
       "work": "エンジンオイル",
       "cost": 0,
       "memo": "エンジンオイル交換",
@@ -183,6 +265,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2022-10-07",
       "km": 257000,
+      "category": "交換",
       "work": "オイルフィルター",
       "cost": 0,
       "memo": "オイルフィルター交換",
@@ -197,6 +280,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2022-11-30",
       "km": 262035,
+      "category": "交換",
       "work": "ブレーキフルード",
       "cost": 0,
       "memo": "ブレーキフルード交換 / タイロッドエンドブーツ・ドライブシャフトブーツ",
@@ -211,6 +295,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2022-11-30",
       "km": 262035,
+      "category": "交換",
       "work": "クラッチフルード",
       "cost": 0,
       "memo": "クラッチフルード交換 / タイロッドエンドブーツ・ドライブシャフトブーツ",
@@ -225,6 +310,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2022-11-30",
       "km": 262035,
+      "category": "交換",
       "work": "ミッションオイル",
       "cost": 0,
       "memo": "ミッションオイル交換 / タイロッドエンドブーツ・ドライブシャフトブーツ",
@@ -239,6 +325,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2023-02-01",
       "km": 270634,
+      "category": "交換",
       "work": "エンジンオイル",
       "cost": 0,
       "memo": "エンジンオイル交換",
@@ -253,6 +340,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2023-02-01",
       "km": 270634,
+      "category": "交換",
       "work": "オイルフィルター",
       "cost": 0,
       "memo": "オイルフィルター交換",
@@ -267,6 +355,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2023-04-04",
       "km": 280134,
+      "category": "交換",
       "work": "エンジンオイル",
       "cost": 0,
       "memo": "エンジンオイル交換",
@@ -281,6 +370,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2023-04-04",
       "km": 280134,
+      "category": "交換",
       "work": "オイルフィルター",
       "cost": 0,
       "memo": "オイルフィルター交換",
@@ -295,6 +385,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2023-07-03",
       "km": 288297,
+      "category": "交換",
       "work": "エンジンオイル",
       "cost": 0,
       "memo": "エンジンオイル交換",
@@ -309,6 +400,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2023-07-03",
       "km": 288297,
+      "category": "交換",
       "work": "オイルフィルター",
       "cost": 0,
       "memo": "オイルフィルター交換",
@@ -323,6 +415,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2023-11-01",
       "km": 296687,
+      "category": "交換",
       "work": "エンジンオイル",
       "cost": 0,
       "memo": "エンジンオイル交換",
@@ -337,6 +430,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2023-11-01",
       "km": 296687,
+      "category": "交換",
       "work": "オイルフィルター",
       "cost": 0,
       "memo": "オイルフィルター交換",
@@ -351,6 +445,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2024-01-16",
       "km": 304080,
+      "category": "交換",
       "work": "ブレーキフルード",
       "cost": 0,
       "memo": "ブレーキフルード交換 / リヤディスク・パッド",
@@ -365,6 +460,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2024-01-16",
       "km": 304080,
+      "category": "交換",
       "work": "ブレーキパッド",
       "cost": 0,
       "memo": "ブレーキパッド交換 / リヤディスク・パッド",
@@ -379,6 +475,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2024-01-29",
       "km": 305134,
+      "category": "交換",
       "work": "ミッションオイル",
       "cost": 0,
       "memo": "ミッションオイル交換 / 左右ドライブシャフト",
@@ -393,6 +490,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2024-02-06",
       "km": 305981,
+      "category": "交換",
       "work": "エンジンオイル",
       "cost": 0,
       "memo": "エンジンオイル交換",
@@ -407,6 +505,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2024-02-06",
       "km": 305981,
+      "category": "交換",
       "work": "オイルフィルター",
       "cost": 0,
       "memo": "オイルフィルター交換",
@@ -421,6 +520,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2024-03-01",
       "km": 308106,
+      "category": "交換",
       "work": "バッテリー",
       "cost": 0,
       "memo": "バッテリー交換 / N－N80",
@@ -435,6 +535,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2024-05-02",
       "km": 312785,
+      "category": "交換",
       "work": "エンジンオイル",
       "cost": 0,
       "memo": "エンジンオイル交換",
@@ -449,6 +550,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2024-07-08",
       "km": 317966,
+      "category": "交換",
       "work": "タイヤ交換",
       "cost": 0,
       "memo": "タイヤ交換交換 / ADVAN FLEVA 205/50R16",
@@ -463,6 +565,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2024-08-13",
       "km": 320031,
+      "category": "交換",
       "work": "エンジンオイル",
       "cost": 0,
       "memo": "エンジンオイル交換 / トップコイル",
@@ -477,6 +580,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2024-08-13",
       "km": 320031,
+      "category": "交換",
       "work": "スパークプラグ",
       "cost": 0,
       "memo": "スパークプラグ交換 / トップコイル",
@@ -491,6 +595,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2024-09-30",
       "km": 325366,
+      "category": "交換",
       "work": "その他",
       "cost": 0,
       "memo": "その他 / A/Cベルト・アイドラプーリー・オルタネーター・ウォータープーリー・クランクプーリー",
@@ -505,6 +610,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2024-11-25",
       "km": 329234,
+      "category": "調整",
       "work": "アライメント",
       "cost": 0,
       "memo": "アライメント / （記号：A） / 左右スタビリンク・リヤピースマフラー",
@@ -519,6 +625,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2024-12-03",
       "km": 330087,
+      "category": "交換",
       "work": "エンジンオイル",
       "cost": 0,
       "memo": "エンジンオイル交換",
@@ -533,6 +640,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2024-12-03",
       "km": 330087,
+      "category": "交換",
       "work": "オイルフィルター",
       "cost": 0,
       "memo": "オイルフィルター交換",
@@ -547,6 +655,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2025-01-14",
       "km": 333739,
+      "category": "交換",
       "work": "ブレーキパッド",
       "cost": 0,
       "memo": "ブレーキパッド交換 / フロントディスク・パッド",
@@ -561,6 +670,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2025-02-03",
       "km": 334600,
+      "category": "交換",
       "work": "エンジンオイル",
       "cost": 0,
       "memo": "エンジンオイル交換",
@@ -575,6 +685,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2025-02-03",
       "km": 334600,
+      "category": "交換",
       "work": "オイルフィルター",
       "cost": 0,
       "memo": "オイルフィルター交換",
@@ -589,6 +700,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2025-05-03",
       "km": 341138,
+      "category": "交換",
       "work": "エンジンオイル",
       "cost": 0,
       "memo": "エンジンオイル交換 / 部分交換",
@@ -603,6 +715,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2025-06-24",
       "km": 344458,
+      "category": "交換",
       "work": "エアクリーナー",
       "cost": 0,
       "memo": "エアクリーナー交換",
@@ -617,6 +730,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2025-06-24",
       "km": 344458,
+      "category": "清掃",
       "work": "スロットルボデー",
       "cost": 0,
       "memo": "スロットルボデー / （記号：C）",
@@ -631,6 +745,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2025-07-02",
       "km": 345852,
+      "category": "交換",
       "work": "エンジンオイル",
       "cost": 0,
       "memo": "エンジンオイル交換 / シャンプーあり",
@@ -645,6 +760,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2025-07-02",
       "km": 345852,
+      "category": "交換",
       "work": "オイルフィルター",
       "cost": 0,
       "memo": "オイルフィルター交換 / シャンプーあり",
@@ -659,6 +775,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2025-08-26",
       "km": 347267,
+      "category": "交換",
       "work": "タイヤ交換",
       "cost": 0,
       "memo": "タイヤ交換交換 / パンク保証にて4本交換",
@@ -673,6 +790,7 @@ window.SEED_STATE = {
       "car": "GK5 フィット",
       "date": "2025-11-19",
       "km": 348102,
+      "category": "交換",
       "work": "その他",
       "cost": 0,
       "memo": "その他 / ラジエーター交換・サーモスタット交換・冷却水交換",
