@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#111827" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="整備記録" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icon.svg" />
+  <title>整備記録</title>
+  <style>
+    :root{--bg:#f3f4f6;--card:#fff;--text:#111827;--muted:#6b7280;--main:#111827;--border:#e5e7eb;--danger:#b91c1c;--soft:#f9fafb;--blue:#2563eb}
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;background:var(--bg);color:var(--text);padding:env(safe-area-inset-top) 14px env(safe-area-inset-bottom);max-width:780px;margin-inline:auto}
+    header{padding:18px 4px 10px;text-align:center;position:sticky;top:0;z-index:3;background:rgba(243,244,246,.94);backdrop-filter:blur(14px)}
+    h1{margin:0;font-size:26px}.subtitle{margin-top:6px;font-size:14px;color:var(--muted)}
+    .card{background:var(--card);border-radius:18px;padding:16px;margin:14px 0;box-shadow:0 8px 24px rgba(0,0,0,.06)}
+    h2{margin:0 0 12px;font-size:18px}
+    label{display:block;font-size:13px;color:var(--muted);margin:12px 0 6px}
+    input,select,textarea,button{width:100%;font-size:16px;border-radius:12px;border:1px solid var(--border);padding:12px;background:white;font-family:inherit}
+    input:focus,select:focus,textarea:focus{outline:none;border-color:#9ca3af;box-shadow:0 0 0 3px rgba(17,24,39,.08)}
+    textarea{min-height:80px;resize:vertical}
+    button{margin-top:14px;border:none;background:var(--main);color:white;font-weight:700;cursor:pointer}
+    button:active{transform:scale(.99)}.secondary{background:#eef0f3;color:var(--text)}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .summary{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;text-align:center}
+    .summary-box{background:var(--soft);border-radius:14px;padding:12px;border:1px solid #eef0f3}
+    .summary-num{font-size:22px;font-weight:800}.summary-label{color:var(--muted);font-size:12px;margin-top:4px}
+    .next-box{background:#eff6ff;border:1px solid #bfdbfe;border-radius:14px;padding:12px;margin-top:14px}
+    .next-title{font-weight:800;color:#1e3a8a;margin:0 0 8px;font-size:14px}.next-preview{color:#1d4ed8;margin:8px 0 0;font-size:14px;line-height:1.5}
+    .record,.alert{border-top:1px solid var(--border);padding:14px 0}.record:first-child,.alert:first-child{border-top:none}
+    .record-title{font-weight:700;font-size:16px;margin-bottom:6px;display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+    .record-meta{color:var(--muted);font-size:14px;line-height:1.65}
+    .badge{display:inline-block;font-size:12px;font-weight:800;border-radius:999px;padding:4px 9px;background:#e5e7eb;color:#374151}
+    .seed{background:#dbeafe;color:#1e40af}.ok{background:#dcfce7;color:#166534}.warn{background:#fef3c7;color:#92400e}.danger{background:#fee2e2;color:#991b1b}
+    .delete-btn{background:transparent;color:var(--danger);border:1px solid #fecaca;margin-top:10px;padding:9px;font-size:14px}
+    .empty{color:var(--muted);text-align:center;padding:20px 0}.tools{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+    .import{width:100%;border-radius:12px;border:none;padding:12px;background:#eef0f3;color:var(--text);font-weight:700;cursor:pointer;text-align:center;font-size:16px;margin:14px 0 0}.import input{display:none}
+    .cycles{display:grid;grid-template-columns:1fr 1fr;gap:10px}.cycle{background:var(--soft);border:1px solid #eef0f3;border-radius:14px;padding:12px}.cycle strong{font-size:14px}.cycle div{color:var(--muted);font-size:12px;margin-top:5px;line-height:1.5}
+    @media(max-width:620px){.row,.summary,.tools,.cycles{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<header><h1>整備記録</h1><div class="subtitle">GK5 / FR5 メンテナンス管理</div></header>
+<main>
+  <section class="card">
+    <h2>合計</h2>
+    <div class="summary">
+      <div class="summary-box"><div class="summary-num" id="count">0</div><div class="summary-label">記録数</div></div>
+      <div class="summary-box"><div class="summary-num" id="currentKm">0</div><div class="summary-label">現在距離 km</div></div>
+      <div class="summary-box"><div class="summary-num" id="dueCount">0</div><div class="summary-label">要確認</div></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>交換時期チェック</h2>
+    <label>現在の走行距離 km</label><input type="number" id="nowKm" inputmode="numeric" />
+    <div id="alerts"></div>
+  </section>
+
+  <section class="card">
+    <h2>記録を追加</h2>
+    <label>車両</label><select id="car"></select>
+    <div class="row"><div><label>日付</label><input type="date" id="date" /></div><div><label>走行距離 km</label><input type="number" id="km" inputmode="numeric" placeholder="305134" /></div></div>
+    <label>整備項目</label><select id="work"></select>
+    <div class="row"><div><label>距離サイクル km</label><input type="number" id="cycleKm" inputmode="numeric" /></div><div><label>期間サイクル 月</label><input type="number" id="cycleMonth" inputmode="numeric" /></div></div>
+    <div class="next-box"><p class="next-title">次回目安 自動計算</p><p class="next-preview" id="nextPreview">整備項目・距離・日付から自動計算します。</p></div>
+    <label>費用 円</label><input type="number" id="cost" inputmode="numeric" placeholder="例：5000" />
+    <label>メモ</label><textarea id="memo" placeholder="部品名、粘度、気になった症状など"></textarea>
+    <button onclick="addRecord()">追加する</button>
+  </section>
+
+  <section class="card">
+    <h2>整備項目サイクル</h2><div id="cycleList" class="cycles"></div>
+  </section>
+
+  <section class="card">
+    <h2>整備履歴</h2>
+    <input id="search" placeholder="検索：オイル、ブレーキ、345852 など" />
+    <div class="tools"><button class="secondary" onclick="exportBackup()">バックアップ</button><label class="import">読込<input id="importFile" type="file" accept="application/json" /></label></div>
+    <button class="secondary" onclick="resetSeed()">初期履歴に戻す</button>
+    <div id="records"></div>
+  </section>
+
+  <section class="card"><h2>iPhoneでアプリ化</h2><div class="record-meta">Safariで開く → 共有ボタン → 「ホーム画面に追加」でPWAとして使えます。</div></section>
+</main>
+<script src="seed-data.js"></script><script src="app.js"></script>
+</body>
+</html>
